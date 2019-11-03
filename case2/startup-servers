@@ -1,0 +1,6 @@
+#!/usr/bin/env python3
+from test.environment import load_e2e_config, docker_compose_up
+
+if __name__ == '__main__':
+    config = load_e2e_config('./e2e.config.yml')
+    docker_compose_up(config)
