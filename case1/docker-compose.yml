@@ -1,0 +1,9 @@
+version: "3"
+services:
+  web:
+    container_name: "web"
+    image: nginx:1.17-alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ../docs:/usr/share/nginx/html
