@@ -30,7 +30,10 @@ class FishesListTest(unittest.TestCase):
         self.driver.close()
         self.driver.quit()
 
-    def test_show_fishes_list_rows(self):
+    def test_the_list_is_loaded_dynamically(self):
+        """
+        一覧が動的に読み込まれること
+        """
         p = FishesList(self.driver, self.target_origin)\
                 .open()\
                 .wait_for_row_to_finish_loading()
@@ -42,26 +45,92 @@ class FishesListTest(unittest.TestCase):
         assert r2.get_name() == 'はまち'
         assert r3.get_name() == 'かつお'
 
-    def test_click_select_button_when_no_select_items(self):
+    def test_an_alert_will_appear_when_OK_click_without_selecting_an_item(self):
+        """
+        未選択状態で"けってい"するとアラートがでること
+        """
         p = FishesList(self.driver, self.target_origin)\
                 .open()\
                 .wait_for_row_to_finish_loading()
 
         alert = p.click_select()
         assert alert.text == "せんたくしてください"
-        alert.dismiss()
+        alert.accept()
 
-    def test_click_select_button_when_one_select_item(self):
+    def test_the_selection_result_is_displayed_when_selecting_an_item_in_the_list_and_OK_click(self):
+        """
+        一覧のアイテムを1件選択して"けってい"すると選択結果が表示されること
+        """
         p = FishesList(self.driver, self.target_origin)\
                 .open()\
                 .wait_for_row_to_finish_loading()
 
         rows = p.get_rows()
         rows[0].click_checkbox()
-        alert = p.click_select()
 
+        alert = p.click_select()
         assert alert.text == "まぐろ"
-        alert.dismiss()
+        alert.accept()
+
+    def test_the_selection_result_is_displayed_when_selecting_some_items_in_the_list_and_OK_click(self):
+        """
+        一覧のアイテムを複数件選択して"けってい"すると選択結果が表示されること
+        """
+        p = FishesList(self.driver, self.target_origin)\
+                .open()\
+                .wait_for_row_to_finish_loading()
+
+        rows = p.get_rows()
+        rows[0].click_checkbox()
+        rows[1].click_checkbox()
+
+        alert = p.click_select()
+        assert alert.text == "まぐろ,はまち"
+        alert.accept()
+
+    def test_all_items_will_be_selected_when_the_overall_check_click(self):
+        """
+        全体チェックをするとすべてのアイテムが選択されること
+        """
+        p = FishesList(self.driver, self.target_origin)\
+                .open()\
+                .wait_for_row_to_finish_loading()
+
+        rows = p.get_rows()
+        rows[0].click_checkbox()
+
+        alert1 = p.click_select()
+        assert alert1.text == "まぐろ"
+        alert1.accept()
+
+        p.click_all_check()
+
+        alert2 = p.click_select()
+        assert alert2.text == "まぐろ,はまち,かつお"
+        alert2.accept()
+
+    def test_deselect_all_items_when_click_uncheck_all(self):
+        """
+        全部チェックを外すとすべてのアイテムが選択解除になること
+        """
+        p = FishesList(self.driver, self.target_origin)\
+                .open()\
+                .wait_for_row_to_finish_loading()
+
+        rows = p.get_rows()
+        rows[0].click_checkbox()
+        rows[1].click_checkbox()
+        rows[2].click_checkbox()
+
+        alert1 = p.click_select()
+        assert alert1.text == "まぐろ,はまち,かつお"
+        alert1.accept()
+
+        p.click_all_check()
+
+        alert2 = p.click_select()
+        assert alert2.text == "せんたくしてください"
+        alert2.accept()
 
 
 if __name__ == '__main__':
