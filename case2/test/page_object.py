@@ -2,7 +2,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.alert import Alert
 from selenium.webdriver.common.by import By
 
-class FishesList(object):
+class FishList(object):
 
     def __init__(self, driver, target_origin):
         self._driver = driver
@@ -27,12 +27,12 @@ class FishesList(object):
         return self
 
     def get_rows(self):
-        rows = self._driver.find_element_by_id('fishes-list')\
+        rows = self._driver.find_element_by_id('fish-list')\
                 .find_elements_by_tag_name('tr')
-        return list(map(lambda el: FishesListRow(self._driver, el), rows))
+        return list(map(lambda el: FishListRow(self._driver, el), rows))
 
 
-class FishesListRow(object):
+class FishListRow(object):
 
     def __init__(self, driver, el):
         self._driver = driver

@@ -2,14 +2,14 @@ import os
 import unittest
 from selenium import webdriver
 from .environment import load_e2e_config
-from .page_object import FishesList
+from .page_object import FishList
 
 
 DRIVERS_DIR_PATH = os.path.join(os.path.dirname(__file__), '..', 'drivers')
 E2E_CONFIG_PATH = os.path.join(os.path.dirname(__file__), '..', 'e2e.config.yml')
 
 
-class FishesListTest(unittest.TestCase):
+class FishListTest(unittest.TestCase):
 
     def setUp(self):
         target_host = os.environ.get('SERVER_HOST', 'localhost')
@@ -34,7 +34,7 @@ class FishesListTest(unittest.TestCase):
         """
         一覧が動的に読み込まれること
         """
-        p = FishesList(self.driver, self.target_origin)\
+        p = FishList(self.driver, self.target_origin)\
                 .open()\
                 .wait_for_row_to_finish_loading()
 
@@ -49,7 +49,7 @@ class FishesListTest(unittest.TestCase):
         """
         未選択状態で"けってい"するとアラートがでること
         """
-        p = FishesList(self.driver, self.target_origin)\
+        p = FishList(self.driver, self.target_origin)\
                 .open()\
                 .wait_for_row_to_finish_loading()
 
@@ -61,7 +61,7 @@ class FishesListTest(unittest.TestCase):
         """
         一覧のアイテムを1件選択して"けってい"すると選択結果が表示されること
         """
-        p = FishesList(self.driver, self.target_origin)\
+        p = FishList(self.driver, self.target_origin)\
                 .open()\
                 .wait_for_row_to_finish_loading()
 
@@ -76,7 +76,7 @@ class FishesListTest(unittest.TestCase):
         """
         一覧のアイテムを複数件選択して"けってい"すると選択結果が表示されること
         """
-        p = FishesList(self.driver, self.target_origin)\
+        p = FishList(self.driver, self.target_origin)\
                 .open()\
                 .wait_for_row_to_finish_loading()
 
@@ -92,7 +92,7 @@ class FishesListTest(unittest.TestCase):
         """
         全体チェックをするとすべてのアイテムが選択されること
         """
-        p = FishesList(self.driver, self.target_origin)\
+        p = FishList(self.driver, self.target_origin)\
                 .open()\
                 .wait_for_row_to_finish_loading()
 
@@ -113,7 +113,7 @@ class FishesListTest(unittest.TestCase):
         """
         全部チェックを外すとすべてのアイテムが選択解除になること
         """
-        p = FishesList(self.driver, self.target_origin)\
+        p = FishList(self.driver, self.target_origin)\
                 .open()\
                 .wait_for_row_to_finish_loading()
 

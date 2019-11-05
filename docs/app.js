@@ -1,13 +1,13 @@
 $(function() {
 
-  var fishes = [];
+  var fish = [];
   var selectedItems = [];
 
-  $.ajax('fishes.json').done(function(response) {
-    fishes = response.fishes;
-    var $fishesList = $('#fishes-list');
+  $.ajax('fish.json').done(function(response) {
+    fish = response.fish;
+    var $fishesList = $('#fish-list');
 
-    $.each(fishes, function(i, r) {
+    $.each(fish, function(i, r) {
       $fishesList.append(
         $('<tr />')
           .append($('<td />').append($('<input type="checkbox" class="select-row" />').data(r)))
@@ -24,7 +24,7 @@ $(function() {
     });
   });
 
-  $('#fishes-list').on('change', '.select-row', function() {
+  $('#fish-list').on('change', '.select-row', function() {
     var $check = $(this);
     var rowData = $check.data();
     if (!$check.prop('checked')) {
@@ -52,7 +52,7 @@ $(function() {
       });
     }
 
-    $('#all-check').prop('checked', selectedItems.length === fishes.length);
+    $('#all-check').prop('checked', selectedItems.length === fish.length);
   });
 
   $('#select-button').click(function() {

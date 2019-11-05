@@ -1,6 +1,6 @@
 const {By, Key, until} = require('selenium-webdriver');
 
-export class FishesList {
+export class FishList {
 
   constructor(driver) {
     this.driver = driver;
@@ -31,14 +31,14 @@ export class FishesList {
   }
 
   async getRows() {
-    const rows = await this.driver.findElement(By.id('fishes-list')).findElements(By.tagName('tr'));
+    const rows = await this.driver.findElement(By.id('fish-list')).findElements(By.tagName('tr'));
     return rows.map(r => {
-      return new FishesListRow(this.driver, r);
+      return new FishListRow(this.driver, r);
     });
   }
 }
 
-export class FishesListRow {
+export class FishListRow {
 
   constructor(driver, el) {
     this._driver = driver;

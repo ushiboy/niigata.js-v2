@@ -1,7 +1,7 @@
 const assert = require('power-assert');
 const chrome = require('selenium-webdriver/chrome');
 const {Builder} = require('selenium-webdriver');
-import {FishesList} from './PageObject.js';
+import {FishList} from './PageObject.js';
 
 describe('FishList', function() {
 
@@ -21,7 +21,7 @@ describe('FishList', function() {
   });
 
   it('一覧が動的に読み込まれること', async () => {
-    const p = new FishesList(driver);
+    const p = new FishList(driver);
     await p.open();
     await p.waitForRowToFinishLoading();
 
@@ -29,13 +29,13 @@ describe('FishList', function() {
 
     assert(rows.length === 3);
 
-    assert(await rows[0].getName() === 'まぐろ')
-    assert(await rows[1].getName() === 'はまち')
-    assert(await rows[2].getName() === 'かつお')
+    assert(await rows[0].getName() === 'まぐろ');
+    assert(await rows[1].getName() === 'はまち');
+    assert(await rows[2].getName() === 'かつお');
   });
 
   it('未選択状態で"けってい"するとアラートがでること', async () => {
-    const p =  new FishesList(driver);
+    const p =  new FishList(driver);
     await p.open();
     await p.waitForRowToFinishLoading();
 
@@ -44,7 +44,7 @@ describe('FishList', function() {
   });
 
   it('一覧のアイテムを1件選択して"けってい"すると選択結果が表示されること', async () => {
-    const p =  new FishesList(driver);
+    const p =  new FishList(driver);
     await p.open();
     await p.waitForRowToFinishLoading();
 
@@ -56,7 +56,7 @@ describe('FishList', function() {
   });
 
   it('一覧のアイテムを複数件選択して"けってい"すると選択結果が表示されること', async () => {
-    const p =  new FishesList(driver);
+    const p =  new FishList(driver);
     await p.open();
     await p.waitForRowToFinishLoading();
 
@@ -69,7 +69,7 @@ describe('FishList', function() {
   });
 
   it('全体チェックをするとすべてのアイテムが選択されること', async () => {
-    const p =  new FishesList(driver);
+    const p =  new FishList(driver);
     await p.open();
     await p.waitForRowToFinishLoading();
 
@@ -86,7 +86,7 @@ describe('FishList', function() {
   });
 
   it('全部チェックを外すとすべてのアイテムが選択解除になること', async () => {
-    const p =  new FishesList(driver);
+    const p =  new FishList(driver);
     await p.open();
     await p.waitForRowToFinishLoading();
 
