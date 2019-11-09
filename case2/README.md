@@ -1,4 +1,4 @@
-Case 2 pythonバージョン
+Case 2 Pythonバージョン
 =====
 
 # 概要
@@ -26,7 +26,7 @@ $ cp e2e.config.yml.example e2e.config.yml
 
 `e2e.config.yml`ファイルを編集し、立ち上げるサーバ環境分workersのポートを追加する。
 
-```
+```yaml
 workers:
   - web_port: 8080
   - web_port: 8081
